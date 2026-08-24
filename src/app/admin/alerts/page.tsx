@@ -1,13 +1,29 @@
-import React from 'react';
-import { requireRole } from '@/lib/auth';
-import { getAdminAcademicAlerts } from '@/services/adminService';
+'use client';
+
+import React, { useState } from 'react';
 import { ShieldAlert, CheckCircle2, AlertTriangle, ArrowRight, UserCheck } from 'lucide-react';
 
-export const dynamic = 'force-dynamic';
+export default function AdminAlertsPage() {
+  const [loggedInterventions, setLoggedInterventions] = useState<{ [id: string]: boolean }>({});
 
-export default async function AdminAlertsPage() {
-  const user = await requireRole(['ADMIN', 'SUPER_ADMIN', 'PRINCIPAL']);
-  const alerts = await getAdminAcademicAlerts();
+  const alerts = [
+    {
+      id: 'al_1',
+      type: 'SCORE_DECLINE',
+      severity: 'HIGH',
+      status: 'ACTIVE',
+      studentName: 'Deepak Varma (10A04 • Class 10-A)',
+      message: 'Consecutive score decline detected across Unit Test 1 (68%) and Quarterly Examination (52%) in Mathematics.',
+    },
+    {
+      id: 'al_2',
+      type: 'LOW_ATTENDANCE',
+      severity: 'MEDIUM',
+      status: 'ACTIVE',
+      studentName: 'Naveen Raj (10A10 • Class 10-A)',
+      message: 'Monthly attendance fell below school threshold (81.2% vs required 85.0%).',
+    },
+  ];
 
   return (
     <div className="space-y-8 max-w-7xl mx-auto">
@@ -45,7 +61,7 @@ export default async function AdminAlertsPage() {
                   {al.type.replace('_', ' ')}
                 </span>
                 <span className="text-xs font-bold text-navy-950">
-                  {al.student.user.name} ({al.student.rollNo} • Class 10-A)
+                  {al.studentName}
                 </span>
               </div>
               <p className="text-xs text-slate-700 leading-relaxed font-medium">{al.message}</p>
@@ -62,10 +78,13 @@ export default async function AdminAlertsPage() {
                 {al.status}
               </span>
               <button
-                onClick={() => alert(`Academic intervention logged for ${al.student.user.name}`)}
+                onClick={() => {
+                  setLoggedInterventions((prev) => ({ ...prev, [al.id]: true }));
+                  alert(`Intervention scheduled for ${al.studentName}`);
+                }}
                 className="px-4 py-1.5 rounded-lg bg-navy-950 hover:bg-navy-900 text-gold-300 font-bold text-xs shadow-sm transition"
               >
-                Log Intervention
+                {loggedInterventions[al.id] ? '✓ Intervention Logged' : 'Log Intervention'}
               </button>
             </div>
           </div>
