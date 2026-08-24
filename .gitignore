@@ -14,14 +14,10 @@ dist
 
 # Environment files
 .env*.local
-.env
 
-# Database
-prisma/dev.db
-prisma/dev.db-journal
-prisma/*.db
-*.sqlite
+# Database journals
 *.sqlite-journal
+prisma/*-journal
 
 # Debug logs
 npm-debug.log*
