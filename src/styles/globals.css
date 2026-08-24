@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --primary-navy: #0B192C;
+    --secondary-navy: #1E3E62;
+    --rich-maroon: #701414;
+    --warm-gold: #D4AF37;
+    --charcoal: #0F172A;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased font-sans selection:bg-gold-400/30 selection:text-navy-950;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight font-bold text-navy-950;
+  }
+}
+
+@layer utilities {
+  .text-gold-gradient {
+    @apply bg-gradient-to-r from-amber-200 via-gold-400 to-amber-300 bg-clip-text text-transparent;
+  }
+  .bg-navy-gradient {
+    @apply bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800;
+  }
+  .bg-maroon-gradient {
+    @apply bg-gradient-to-br from-maroon-950 via-maroon-900 to-maroon-800;
+  }
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-slate-200/80 shadow-luxury;
+  }
+  .glass-card-dark {
+    @apply bg-navy-900/80 backdrop-blur-md border border-navy-700/60 shadow-luxury-lg;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Print Styles for Digital Report Cards */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .page-break {
+    page-break-before: always;
+  }
+}
