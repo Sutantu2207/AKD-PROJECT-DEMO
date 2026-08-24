@@ -56,7 +56,7 @@ export function PublicFooter() {
                 { name: 'Upcoming Events Calendar', href: '/events' },
                 { name: 'Masonry Photo Gallery', href: '/gallery' },
               ].map((link) => (
-                <li key={link.href}>
+                <li key={link.name}>
                   <Link
                     href={link.href}
                     className="hover:text-gold-300 transition-colors flex items-center gap-1.5 text-slate-400"
@@ -85,7 +85,7 @@ export function PublicFooter() {
                 { name: 'Alumni Network & Stories', href: '/alumni' },
                 { name: 'Frequently Asked Questions', href: '/faq' },
               ].map((link) => (
-                <li key={link.href}>
+                <li key={link.name}>
                   <Link
                     href={link.href}
                     className="hover:text-gold-300 transition-colors flex items-center gap-1.5 text-slate-400"
